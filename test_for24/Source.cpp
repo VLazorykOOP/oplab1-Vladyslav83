@@ -4,8 +4,8 @@
 #include <cmath>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
 
-// Функції Qnk, Rnk, Qnr, Gnk, Wnk, U, T, Tfun, та інші
 double Qnr(double x, double y);
 double Qnk(double x, double y);
 double Rnk(double x, double y, double z);
@@ -71,24 +71,23 @@ int main() {
     std::getline(std::cin, text);
 
     // Обчислення функції
-    double u, v, gold;
-    u = func1(x, y, z);
-    v = func2(x, y, z);
+    double u, v;
+    u = Qnk(x, y) + Rnk(x, y, z);
+    v = 2 * Gnk(x, y, z);
 
-    if (/* умови алгоритму 1 */) {
-        // обчислення за алгоритмом 1
+    if (x * y - 10 > 0) {
+        z = 1.25;
+        u = Qnk(x, y) + Rnk(x, y, z);
     }
-    else if (/* умови алгоритму 2 */) {
-        // обчислення за алгоритмом 2
+    else if (x * y - 2 > 0) {
+        z = 1.5;
+        u = Qnk(x, y) + Rnk(x, y, z);
     }
-    else if (/* умови алгоритму 3 */) {
-        // обчислення за алгоритмом 3
-    }
-    else if (/* умови алгоритму 4 */) {
-        // обчислення за алгоритмом 4
+    else if (x - y > 0) {
+        y = 0;
+        u = Qnk(x, y);
     }
 
-    // Виклик функції func для отримання результату
     double result = func(u, v, text, dat3);
 
     // Виведення результату
@@ -152,12 +151,4 @@ double Tfun(double u, double v, const std::string& text, const std::unordered_ma
         r = it->second;
     }
     return std::sqrt((u - v) * (u - v) + r * r * r);
-}
-
-double func1(double x, double y, double z) {
-    return Qnk(x, y) + Rnk(x, y, z);
-}
-
-double func2(double x, double y, double z) {
-    return Gnk(x, y, z);
 }
